@@ -146,7 +146,7 @@ ab14febaa837b6c1484c35e6
 |iOS Simulator|`2b5c6faa6bb6bdcc4c4731a1`|
 |ONNX Runtime|`2b5c6faa6bb6bdcc4c4735a1`|
 
-# Docker
+# Docker running on WSL2 (Ubuntu 20.04.3 LTS)
 
 To build this Docker image, run on the Docker host:
 
@@ -155,10 +155,6 @@ To build this Docker image, run on the Docker host:
 To run the Docker image interactively run on the Docker host:
 
 `docker run --privileged -ti --name neuralhash neuralhash /bin/bash`
-
-If you are on Windows and using a Bash shell, run on the Docker host:
-
-`MSYS_NO_PATHCONV=1 docker run --privileged -ti --name neuralhash neuralhash /bin/bash`
 
 Once you have logged into the Docker image, you must run the script.sh on the container to generate the ONNX model:
 
@@ -174,10 +170,12 @@ Once the file is in the container, run this command on the container:
 
 This all worked fine on Ubuntu 20.04.3 LTS running on [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
-For `cat.png` NeuralHash generated:
+For `cat.png` the NeuralHash generated was:
+```
 33c542c3204b10d946cec29e
 ```
 Then editing the same photo, now `cat-edited.png`, removing a section from it and drawing some random lines on it, the hash generated was:
+```
 32c543a32ed3fc59068cc0cb
 ```
 Which are quite similar hashes.
