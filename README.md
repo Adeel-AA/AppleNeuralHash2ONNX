@@ -180,6 +180,8 @@ Then editing the same photo, now `cat-edited.png`, removing a section from it an
 ```
 Of which the hashes are quite similar at the beginning.
 
+The `iPhone13,4_14.7.1_18G82_Restore.ipsw` restore image was used.
+
 This is some interesting work, thank you!
 
 ## Credits
