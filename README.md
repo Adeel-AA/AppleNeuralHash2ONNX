@@ -183,6 +183,6 @@ Of which the hashes are quite similar at the beginning.
 This is some interesting work, thank you!
 
 ## Credits
-- [Dockerfile and Script](https://github.com/jeremytieman).
+- Thanks to [@jeremytieman](https://github.com/jeremytieman) for the Dockerfile and Script.
 - [nhcalc](https://github.com/KhaosT/nhcalc) for uncovering NeuralHash private API.
 - [TNN](https://github.com/Tencent/TNN) for compiled Core ML to ONNX script.
