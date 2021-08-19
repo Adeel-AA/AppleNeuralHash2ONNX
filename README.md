@@ -146,7 +146,37 @@ ab14febaa837b6c1484c35e6
 |iOS Simulator|`2b5c6faa6bb6bdcc4c4731a1`|
 |ONNX Runtime|`2b5c6faa6bb6bdcc4c4735a1`|
 
-## Credits
+# Docker
 
+To build this Docker image, run on the Docker host:
+
+`docker build --build-arg IPSW_FILE=<filename>.ipsw -t neuralhash .`
+
+To run the Docker image interactively run on the Docker host:
+
+`docker run --privileged -ti --name neuralhash neuralhash /bin/bash`
+
+If you are on Windows and using a Bash shell, run on the Docker host:
+
+`MSYS_NO_PATHCONV=1 docker run --privileged -ti --name neuralhash neuralhash /bin/bash`
+
+Once you have logged into the Docker image, you must run the script.sh on the container to generate the ONNX model:
+
+`./script.sh`
+
+Ubuntu 20.04.3 LTS running on [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10), I had to covert the script with:
+
+`dos2unix script.sh`
+
+This generates the ONNX model file. Once the file has been generate, you can copy an image from the host to the container by running this on the Docker host:
+
+`docker cp <image_file> neuralhash:/workdir`
+
+Once the file is in the container, run this command on the container:
+
+`python3 nnhash.py ./neural_hash/model.onnx ./neural_hash/neuralhash_128x96_seed1.dat <image_file>`
+
+## Credits
+- [Dockerfile and Script](https://github.com/jeremytieman).
 - [nhcalc](https://github.com/KhaosT/nhcalc) for uncovering NeuralHash private API.
 - [TNN](https://github.com/Tencent/TNN) for compiled Core ML to ONNX script.
