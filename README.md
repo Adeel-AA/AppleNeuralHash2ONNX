@@ -164,10 +164,6 @@ Once you have logged into the Docker image, you must run the script.sh on the co
 
 `./script.sh`
 
-Ubuntu 20.04.3 LTS running on [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10), I had to covert the script with:
-
-`dos2unix script.sh`
-
 This generates the ONNX model file. Once the file has been generate, you can copy an image from the host to the container by running this on the Docker host:
 
 `docker cp <image_file> neuralhash:/workdir`
@@ -175,6 +171,16 @@ This generates the ONNX model file. Once the file has been generate, you can cop
 Once the file is in the container, run this command on the container:
 
 `python3 nnhash.py ./neural_hash/model.onnx ./neural_hash/neuralhash_128x96_seed1.dat <image_file>`
+
+This all worked fine on Ubuntu 20.04.3 LTS running on [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+For `cat.png` NeuralHash generated:
+33c542c3204b10d946cec29e
+```
+Then editing the same photo, now `cat-edited.png`, removing a section from it and drawing some random lines on it, the hash generated was:
+32c543a32ed3fc59068cc0cb
+```
+Which are quite similar hashes.
 
 ## Credits
 - [Dockerfile and Script](https://github.com/jeremytieman).
