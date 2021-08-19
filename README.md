@@ -178,7 +178,9 @@ Then editing the same photo, now `cat-edited.png`, removing a section from it an
 ```
 32c543a32ed3fc59068cc0cb
 ```
-Which are quite similar hashes.
+Of which the hashes are quite similar at the beginning.
+
+This is some interesting work, thank you!
 
 ## Credits
 - [Dockerfile and Script](https://github.com/jeremytieman).
