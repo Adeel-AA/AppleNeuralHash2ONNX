@@ -93,7 +93,7 @@ Of which the hashes are quite similar at the beginning.
 <br>
 
 However, it's quite clear the ineffectiveness of Apple's perceptual hashing method on images. For example, this image of
-a dog.
+a dog
 
 ![Dog](dog.png)
 
