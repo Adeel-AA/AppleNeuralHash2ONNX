@@ -16,7 +16,8 @@ Once you have logged into the Docker image, you must run the script.sh on the co
 
 `./script.sh`
 
-This generates the ONNX model file. Once the file has been generate, you can copy an image from the host to the container by running this on the Docker host:
+This generates the ONNX model file. Once the file has been generate, you can copy an image from the host to the
+container by running this on the Docker host:
 
 `docker cp <image_file> neuralhash:/workdir`
 
@@ -26,19 +27,7 @@ Once the file is in the container, run this command on the container:
 
 This all worked fine on Ubuntu 20.04.3 LTS running on [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
-For `cat.png` the NeuralHash generated was:
-```
-33c542c3204b10d946cec29e
-```
-Then editing the same photo, now `cat-edited.png`, removing a section from it and drawing some random lines on it, the hash generated was:
-```
-32c543a32ed3fc59068cc0cb
-```
-Of which the hashes are quite similar at the beginning.
-
-The `iPhone13,4_14.7.1_18G82_Restore.ipsw` restore image was used.
-
-<br>
+The `iPhone13,4_14.7.1_18G82_Restore.ipsw` restore image was used for this testing.
 
 ## Usage
 
@@ -49,20 +38,27 @@ The `iPhone13,4_14.7.1_18G82_Restore.ipsw` restore image was used.
 ### Calculate neural hash with [onnxruntime](https://github.com/microsoft/onnxruntime)
 
 1. Install required libraries:
+
 ```bash
 pip install onnxruntime pillow
 ```
+
 2. Run `nnhash.py` on an image:
+
 ```bash
 python3 nnhash.py /path/to/model.onnx /path/to/neuralhash_128x96_seed1.dat image.jpg
 ```
 
 Example output:
+
 ```
 ab14febaa837b6c1484c35e6
 ```
 
-**Note:** Neural hash generated here might be a few bits off from one generated on an iOS device. This is expected since different iOS devices generate slightly different hashes anyway. The reason is that neural networks are based on floating-point calculations. The accuracy is highly dependent on the hardware. For smaller networks it won't make any difference. But NeuralHash has 200+ layers, resulting in significant cumulative errors.
+**Note:** Neural hash generated here might be a few bits off from one generated on an iOS device. This is expected since
+different iOS devices generate slightly different hashes anyway. The reason is that neural networks are based on
+floating-point calculations. The accuracy is highly dependent on the hardware. For smaller networks it won't make any
+difference. But NeuralHash has 200+ layers, resulting in significant cumulative errors.
 
 |Device|Hash|
 |---|---|
@@ -71,34 +67,58 @@ ab14febaa837b6c1484c35e6
 |iOS Simulator|`2b5c6faa6bb6bdcc4c4731a1`|
 |ONNX Runtime|`2b5c6faa6bb6bdcc4c4735a1`|
 
-<br>
-
 ## Results
 
-It's quite clear the ineffectiveness of Apple's perceptual hashing method on images. For example, this image of a dog.
+For this picture of a cat
+
+![Cat](cat.png)
+
+The NeuralHash generated was:
+
+```
+33c542c3204b10d946cec29e
+```
+
+Then editing the same photo, removing a section from it and drawing some random lines on it
+
+![Cat](cat-edited.png)
+
+the hash generated was:
+
+```
+32c543a32ed3fc59068cc0cb
+```
+
+Of which the hashes are quite similar at the beginning.
+<br>
+
+However, it's quite clear the ineffectiveness of Apple's perceptual hashing method on images. For example, this image of
+a dog.
 
 ![Dog](dog.png)
 
-Produces the hash: 
+Produces the hash:
+
 ```
 59a34eabe31910abfb06f308
 ```
+
 And for this image
 
 ![Dog](clearly-not-a-dog.png)
 
 it produces the exact same hash!
+
 ```
 59a34eabe31910abfb06f308
 ```
-
-
 
 Yet for this classic windows background image
 
 ![Windows](windows-background.png)
 
 The hash produced is:
+
 ```
 9f3bce9b9d716bf399cf4f21
 ```
@@ -108,23 +128,23 @@ And for the same image but slightly reduced with some imagine noise surrounding 
 ![Windows](windows-background-edited.png)
 
 which clearly identifies as the same image however the hash produced is completely different:
+
 ```
 ff0dcf8b9371ebd28a4f5d2d
 ```
 
 Oh and Apple's manual verification producedure?
 
-
 ![Lol](lol.jpeg)
-
 <br>
 
-This is some interesting work, thank you! Check out the interesting discussion [here](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX/issues/1).
-
-<br>
+This is some interesting work, thank you! Check out the interesting
+discussion [here](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX/issues/1).
 
 ## Credits
-- [@AsuharietYgvar](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX) for the original project for converting Apple NeuralHash model for CSAM Detection to ONNX.
+
+- [@AsuharietYgvar](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX) for the original project for converting
+  Apple NeuralHash model for CSAM Detection to ONNX.
 - [@jeremytieman](https://github.com/jeremytieman) for the Dockerfile and Script.
 - [nhcalc](https://github.com/KhaosT/nhcalc) for uncovering NeuralHash private API.
 - [TNN](https://github.com/Tencent/TNN) for compiled Core ML to ONNX script.
