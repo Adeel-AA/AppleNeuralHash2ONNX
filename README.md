@@ -83,7 +83,7 @@ Then editing the same photo, removing a section from it and drawing some random 
 
 ![Cat](cat-edited.png)
 
-the hash generated was:
+The hash generated was:
 
 ```
 32c543a32ed3fc59068cc0cb
@@ -127,7 +127,7 @@ And for the same image but slightly reduced with some imagine noise surrounding 
 
 ![Windows](windows-background-edited.png)
 
-which clearly identifies as the same image however the hash produced is completely different:
+Which clearly identifies as the same image however the hash produced is completely different:
 
 ```
 ff0dcf8b9371ebd28a4f5d2d
